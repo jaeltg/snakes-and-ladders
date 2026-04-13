@@ -1,0 +1,29 @@
+.board {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    height: 85vh;
+    margin: auto;
+    gap: 0.5em
+}
+
+.tile {
+    display: flex;
+   align-items: center;
+   justify-content: center; 
+   background-color: #ADDF7C;
+   border-radius: 0.8em;
+       aspect-ratio: 1/1;
+}
+
+.greenTile {
+background-color: #ADDF7C;
+}
+
+.pinkTile {
+    background-color: #F2A6C7;
+}
+
+.tileText {
+     color: #FFF;
+     font-size: 2.2em;
+}
