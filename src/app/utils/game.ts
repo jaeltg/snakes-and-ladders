@@ -1,19 +1,9 @@
 export function generateBoard(): number[] {
-  const board: number[] = [];
+  const size = 10;
+  return Array.from({length: size}, (_, row) => {
+    const startVal = row * size + 1;
+    const rowNumbers = Array.from({length: size}, (_, i) => startVal + i);
 
-  for (let row = 0; row < 10; row++) {
-    for (let col = 0; col < 10; col++) {
-      let num;
-
-      if (row % 2 === 0) {
-        num = row * 10 + col + 1;
-      } else {
-        num = row * 10 + (10 - col);
-      }
-
-      board.unshift(num);
-    }
-  }
-
-  return board;
+    return row % 2 === 1 ? rowNumbers.reverse() : rowNumbers;
+  }).reverse().flat()
 }

@@ -3,7 +3,7 @@
     grid-template-columns: repeat(10, 1fr);
     height: 85vh;
     margin: auto;
-    gap: 0.5em
+    gap: 0.5rem
 }
 
 .tile {
@@ -11,7 +11,7 @@
    align-items: center;
    justify-content: center; 
    background-color: #ADDF7C;
-   border-radius: 0.8em;
+   border-radius: 1.2rem;
        aspect-ratio: 1/1;
 }
 
@@ -25,5 +25,14 @@ background-color: #ADDF7C;
 
 .tileText {
      color: #FFF;
-     font-size: 2.2em;
+     font-size: 3rem;
+}
+
+.playerPiece {
+    background-color: red;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1.5rem;
+    position: absolute;
+    z-index: 30
 }
