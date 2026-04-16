@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <h1 className={styles.mainTitle}>Snakes & Ladders</h1>
-      <Board/>
+      <Board />
     </main>
   );
 }
