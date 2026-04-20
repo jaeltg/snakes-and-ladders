@@ -27,19 +27,3 @@
     color: #FFF;
     font-size: 3rem;
 }
-
-.playerPiece {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 1.5rem;
-    position: absolute;
-    z-index: 30
-}
-
-.playerRed {
-    background-color: red;
-}
-
-.playerBlue {
-    background-color: blue;
-}

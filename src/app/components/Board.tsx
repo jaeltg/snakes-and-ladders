@@ -1,9 +1,10 @@
 "use client"
 
 import { useState } from "react";
-import { generateBoard } from "../utils/game";
+import { generateBoard, movePlayer } from "../utils/game";
 import styles from './Board.module.css';
 import { getRandomIntInclusive } from "../utils/helpers";
+import PlayerToken from "./PlayerToken";
 
 const BOARD_TILES = generateBoard();
 
@@ -36,35 +37,24 @@ export default function Board() {
     74: 92,
   };
 
-  function rollDice() {
-    const roll = getRandomIntInclusive(1, 6);
-    setRolledNumber(roll)
+  function handleRollDice() {
+    const roll = getRandomIntInclusive(1, 6)
+    setRolledNumber(roll);
 
-    setPlayers((prev) => {
-      return prev.map((player, index) => {
-        if (index !== currentPlayerIndex) return player;
+    setPlayers((prev) =>
+      prev.map((player, index) =>
+        index === currentPlayerIndex
+          ? movePlayer(player, roll, snakes, ladders)
+          : player
+      )
+    );
 
-        let newPosition = player.position + roll;
-
-        if (newPosition > 100) {
-          return { ...player, position: 100 - (newPosition - 100) }
-        }
-        if (snakes[newPosition]) {
-          newPosition = snakes[newPosition];
-        }
-
-        if (ladders[newPosition]) {
-          newPosition = ladders[newPosition];
-        }
-        return { ...player, position: newPosition }
-      })
-    })
     setCurrentPlayerIndex((prev) => (prev + 1) % players.length);
   }
 
   return (
     <>
-      <button onClick={() => rollDice()}>{`Dice: ${rolledNumber}`}</button>
+      <button onClick={() => handleRollDice()}>{`Dice: ${rolledNumber}`}</button>
       <div className={styles.board}>
 
         {BOARD_TILES.map((num) => {
@@ -75,14 +65,11 @@ export default function Board() {
               key={num}
               className={`${styles.tile} ${isGreen ? styles.greenTile : styles.pinkTile}`}
             >
-              {players.map((p) => {
-                if (p.position === num) {
-                  return <div
-                    key={p.id}
-                    className={`${styles.playerPiece} ${p.color === 'red' ? styles.playerRed : styles.playerBlue}`}
-                  />
-                }
-              })
+              {players
+                .filter(p => p.position === num)
+                .map(p => (
+                  <PlayerToken key={p.id} color={p.color} />
+                ))
               }
               <p className={styles.tileText}>{num}</p>
             </div>

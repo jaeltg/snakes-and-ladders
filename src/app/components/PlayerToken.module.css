@@ -1,0 +1,7 @@
+.playerPiece {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1.5rem;
+    position: absolute;
+    z-index: 30
+}
