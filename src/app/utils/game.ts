@@ -1,5 +1,7 @@
+const BOARD_SIZE = 10;
+
 export function generateBoard(): number[] {
-  const size = 10;
+  const size = BOARD_SIZE;
   return Array.from({ length: size }, (_, row) => {
     const startVal = row * size + 1;
     const rowNumbers = Array.from({ length: size }, (_, i) => startVal + i);
@@ -7,6 +9,21 @@ export function generateBoard(): number[] {
     return row % 2 === 1 ? rowNumbers.reverse() : rowNumbers;
   }).reverse().flat()
 };
+
+export function getCoordsFromPosition(position: number) {
+  const size = BOARD_SIZE;
+  const index = position - 1;
+
+  const row = Math.floor(index / size);
+  const col = index % size;
+
+  const isEvenRow = row % 2 === 0;
+
+  const x = isEvenRow ? col : size - 1 - col;
+  const y = size - 1 - row;
+
+  return { x, y };
+}
 
 export type Player = {
   id: number;

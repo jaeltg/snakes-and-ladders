@@ -1,7 +1,21 @@
-.playerPiece {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 1.5rem;
+.tokenMover {
+    width: 10%;
+    height: 10%;
     position: absolute;
-    z-index: 30
+    top: 0;
+    left: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: transform 0.5s ease-in-out;
+    z-index: 30;
+    pointer-events: none;
+}
+
+.tokenCircle {
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
 }

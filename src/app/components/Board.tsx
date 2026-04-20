@@ -17,24 +17,31 @@ export default function Board() {
       </button>
 
       <div className={styles.board}>
-        {BOARD_TILES.map((num) => {
-          const isGreen = num % 2 === 0;
+        <div className={styles.grid}>
+          {BOARD_TILES.map((num) => {
+            const isGreen = num % 2 === 0;
 
-          return (
-            <div
-              key={num}
-              className={`${styles.tile} ${isGreen ? styles.greenTile : styles.pinkTile}`}
-            >
-              {players
-                .filter(p => p.position === num)
-                .map(p => (
-                  <PlayerToken key={p.id} color={p.color} />
-                ))
-              }
-              <p className={styles.tileText}>{num}</p>
-            </div>
-          )
-        })}
+            return (
+              <div
+                key={num}
+                className={`${styles.tile} ${isGreen ? styles.greenTile : styles.pinkTile}`}
+              >
+                <p className={styles.tileText}>{num}</p>
+              </div>
+            )
+          })}
+        </div>
+
+        <div className={styles.tokenLayer}>
+          {players.map(p => (
+            <PlayerToken
+              key={p.id}
+              color={p.color}
+              position={p.position}
+            />
+          ))
+          }
+        </div>
       </div>
     </>
   );
