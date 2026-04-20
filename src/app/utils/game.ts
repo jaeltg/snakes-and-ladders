@@ -14,6 +14,26 @@ export type Player = {
   color: string;
 };
 
+
+export const snakes: Record<number, number> = {
+  40: 3,
+  43: 18,
+  27: 5,
+  54: 31,
+  66: 45,
+  99: 41,
+  89: 53,
+};
+
+export const ladders: Record<number, number> = {
+  4: 25,
+  13: 46,
+  50: 69,
+  42: 63,
+  62: 81,
+  74: 92,
+};
+
 export function movePlayer(
   player: Player,
   roll: number,
