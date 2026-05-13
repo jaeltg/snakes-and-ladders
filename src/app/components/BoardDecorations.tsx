@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { getCoordsFromPosition, ladders, snakes } from '../utils/game';
 import styles from './PlayerToken.module.css'
 
@@ -6,7 +7,7 @@ type Props = {
     position: number;
 };
 
-export default function BoardDecorations() {
+function BoardDecorations() {
     return (
         <svg
             width="100%"
@@ -53,15 +54,26 @@ export default function BoardDecorations() {
                 const x2 = (endCoords.x + 0.5) * 10;
                 const y2 = (endCoords.y + 0.5) * 10;
 
+                const dx = x2 - x1;
+                const dy = y2 - y1;
+
+                const cx1 = x1 + dx * 0.25 + 5;
+                const cy1 = y1 + dy * 0.25;
+
+                const cx2 = x1 + dx * 0.75 - 5;
+                const cy2 = y1 + dy * 0.75;
+
                 return (
-                    <line
+                    <path
                         key={`${start}-${end}`}
-                        x1={x1}
-                        y1={y1}
-                        x2={x2}
-                        y2={y2}
+                        d={`
+                            M ${x1} ${y1}
+                            Q ${cx1} ${cy1} ${(x1 + x2) / 2} ${(y1 + y2) / 2}
+                            Q ${cx2} ${cy2} ${x2} ${y2}
+                        `}
                         stroke="green"
-                        strokeWidth="1"
+                        strokeWidth="2"
+                        fill="none"
                         strokeLinecap="round"
                     />
                 );
@@ -69,3 +81,5 @@ export default function BoardDecorations() {
         </svg>
     );
 }
+
+export default memo(BoardDecorations);

@@ -10,8 +10,8 @@
     justify-content: center;
 
     transition:
-        left 0.25s linear,
-        top 0.25s linear;
+        left 0.15s linear,
+        top 0.15s linear;
 
     transform: translate(-50%, -50%);
     z-index: 30;
