@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ladders, movePlayer, Player, snakes } from "../utils/game";
-import { getRandomIntInclusive } from "../utils/helpers";
+import { getRandomIntInclusive, sleep } from "../utils/helpers";
 
 export function useGame() {
     const [players, setPlayers] = useState<Player[]>([
@@ -12,17 +12,49 @@ export function useGame() {
 
     const currentPlayer = players[currentPlayerIndex];
 
-    function rollDice() {
+    async function rollDice() {
         const roll = getRandomIntInclusive(1, 6)
         setRolledNumber(roll);
 
-        setPlayers((prev) =>
-            prev.map((player, index) =>
-                index === currentPlayerIndex
-                    ? movePlayer(player, roll, snakes, ladders)
-                    : player
-            )
+        const player = players[currentPlayerIndex];
+
+        const moveResult = movePlayer(
+            player,
+            roll,
+            snakes,
+            ladders
         );
+
+        for (
+            let pos = moveResult.startPosition + 1;
+            pos <= moveResult.endPosition;
+            pos++
+        ) {
+            await sleep(250);
+
+            setPlayers(prev =>
+                prev.map((p, index) =>
+                    index === currentPlayerIndex
+                        ? { ...p, position: pos }
+                        : p
+                )
+            );
+        }
+
+        if (moveResult.finalPosition !== moveResult.endPosition) {
+            await sleep(300);
+
+            setPlayers(prev =>
+                prev.map((p, index) =>
+                    index === currentPlayerIndex
+                        ? {
+                            ...p,
+                            position: moveResult.finalPosition
+                        }
+                        : p
+                )
+            );
+        }
 
         setCurrentPlayerIndex((prev) => (prev + 1) % players.length);
     }

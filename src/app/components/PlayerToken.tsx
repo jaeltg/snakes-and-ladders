@@ -12,7 +12,8 @@ export default function PlayerToken({ color, position }: Props) {
         <div
             className={styles.tokenMover}
             style={{
-                transform: `translate(${x * 100}%, ${y * 100}%)`,
+                left: `${(x + 0.5) * 10}%`,
+                top: `${(y + 0.5) * 10}%`,
             }}
         >
             <div

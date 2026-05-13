@@ -1,6 +1,6 @@
 .tokenMover {
-    width: 10%;
-    height: 10%;
+    width: calc(100% / 10);
+    height: calc(100% / 10);
     position: absolute;
     top: 0;
     left: 0;
@@ -9,7 +9,11 @@
     align-items: center;
     justify-content: center;
 
-    transition: transform 0.5s ease-in-out;
+    transition:
+        left 0.25s linear,
+        top 0.25s linear;
+
+    transform: translate(-50%, -50%);
     z-index: 30;
     pointer-events: none;
 }

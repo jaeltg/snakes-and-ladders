@@ -51,24 +51,34 @@ export const ladders: Record<number, number> = {
   74: 92,
 };
 
+export type MoveResult = {
+  startPosition: number;
+  endPosition: number;
+  finalPosition: number;
+}
+
 export function movePlayer(
   player: Player,
   roll: number,
   snakes: Record<number, number>,
   ladders: Record<number, number>
-): Player {
-  let newPosition = player.position + roll;
+): MoveResult {
+  const startPosition = player.position;
 
-  if (newPosition > 100) {
-    newPosition = 100 - (newPosition - 100)
+  let endPosition = startPosition + roll;
+
+  if (endPosition > 100) {
+    endPosition = 100 - (endPosition - 100)
   }
 
-  if (snakes[newPosition]) {
-    newPosition = snakes[newPosition];
+  let finalPosition = endPosition;
+
+  if (snakes[finalPosition]) {
+    finalPosition = snakes[finalPosition];
   }
 
-  if (ladders[newPosition]) {
-    newPosition = ladders[newPosition];
+  if (ladders[finalPosition]) {
+    finalPosition = ladders[finalPosition];
   }
-  return { ...player, position: newPosition };
+  return { startPosition, endPosition, finalPosition };
 }
