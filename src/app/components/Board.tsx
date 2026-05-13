@@ -8,13 +8,14 @@ import PlayerToken from "./PlayerToken";
 const BOARD_TILES = generateBoard();
 
 export default function Board() {
-  const { players, rolledNumber, rollDice } = useGame();
+  const { players, rolledNumber, rollDice, currentPlayer } = useGame();
 
   return (
     <>
       <button onClick={() => rollDice()}>
         {`Dice: ${rolledNumber}`}
       </button>
+      <p>Current turn: Player {currentPlayer.id}</p>
 
       <div className={styles.board}>
         <div className={styles.grid}>
