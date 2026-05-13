@@ -3,6 +3,7 @@
 import { useGame } from "../hooks/useGame";
 import { generateBoard } from "../utils/game";
 import styles from './Board.module.css';
+import BoardDecorations from "./BoardDecorations";
 import PlayerToken from "./PlayerToken";
 
 const BOARD_TILES = generateBoard();
@@ -32,7 +33,7 @@ export default function Board() {
             )
           })}
         </div>
-
+        <BoardDecorations />
         <div className={styles.tokenLayer}>
           {players.map(p => (
             <PlayerToken
